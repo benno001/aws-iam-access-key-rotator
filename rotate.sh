@@ -18,6 +18,18 @@ done
 
 PROFILE=${profile:-default}
 
+# Check if jq is installed
+if ! hash jq; then
+	echo "Can't find jq. Is it installed?"
+	exit 1
+fi
+
+# Check if aws cli is installed
+if ! hash aws; then
+	echo "Can't find aws cli. Is it installed?"
+	exit 1
+fi
+
 IDENTITY=$(aws sts get-caller-identity --profile "$PROFILE")
 
 STATUS=$?
@@ -28,12 +40,6 @@ if [ "$STATUS" -gt 0 ]; then
 fi
 
 echo "Renewing access keys as $IDENTITY"
-
-# Check if jq is installed
-if ! hash jq; then
-	echo "Can't find jq. Is it installed?"
-	exit 1
-fi
 
 read -r KEY_COUNT < <(aws iam list-access-keys --profile "$PROFILE" | jq '.AccessKeyMetadata | length')
 
