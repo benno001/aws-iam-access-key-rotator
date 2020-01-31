@@ -1,5 +1,7 @@
 # AWS IAM access key rotation helper script
 
+Rotates access keys in `~/.aws/credentials` for a given profile by creating a new one and deleting the old one. Does not work if the user has more than one access key configured already.
+
 ## Requirements
 
 - jq

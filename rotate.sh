@@ -7,11 +7,13 @@ print_usage() {
 }
 
 while getopts 'p:' flag; do
-  case "${flag}" in
-    p) 	profile="${OPTARG}" ;;
-    *)	print_usage
-       	exit 1 ;;
-  esac
+	case "${flag}" in
+	p) profile="${OPTARG}" ;;
+	*)
+		print_usage
+		exit 1
+		;;
+	esac
 done
 
 PROFILE=${profile:-default}
@@ -24,7 +26,6 @@ if [ "$STATUS" -gt 0 ]; then
 	echo "Couldn't get caller identity"
 	exit 1
 fi
-
 
 echo "Renewing access keys as $IDENTITY"
 
@@ -44,7 +45,7 @@ fi
 if [ "$KEY_COUNT" -gt 1 ]; then
 	echo "More than one access key present. Don't know which one to rotate."
 	exit 1
-fi	
+fi
 
 read -r OLD_ACCESS_KEY < <(aws iam list-access-keys --profile "$PROFILE" | jq -r '.AccessKeyMetadata[0].AccessKeyId')
 
@@ -59,13 +60,11 @@ fi
 
 aws iam update-access-key --access-key-id "$OLD_ACCESS_KEY" --status Inactive --profile "$PROFILE"
 
-
 aws iam list-access-keys --profile "$PROFILE"
 aws iam delete-access-key --access-key-id "$OLD_ACCESS_KEY" --profile "$PROFILE"
 
 aws configure set aws_access_key_id "$ACCESS_KEY_ID" --profile "$PROFILE"
 aws configure set aws_secret_access_key "$SECRET_KEY" --profile "$PROFILE"
-
 
 echo "Deleted access key $OLD_ACCESS_KEY for profile $PROFILE"
 echo "New access key ID: $ACCESS_KEY_ID"
