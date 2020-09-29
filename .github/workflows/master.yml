@@ -20,11 +20,8 @@ jobs:
         run: |
           pip install pre-commit
           pre-commit run --all-files --show-diff-on-failure --color=always
-<<<<<<< HEAD
       - name: shellcheck
         uses: ludeeus/action-shellcheck@0.1.0
-=======
->>>>>>> Add workflows for prettier and tagging #MAJOR
   bumpAndTag:
     runs-on: ubuntu-latest
     name: "Bump and Tag"
