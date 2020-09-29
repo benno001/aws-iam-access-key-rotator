@@ -1,3 +1,8 @@
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+![CI](https://github.com/benno001/aws-iam-access-key-rotator/workflows/CI/badge.svg?branch=master)
+[![GitHub version](https://badge.fury.io/gh/benno001%2Faws-iam-access-key-rotator.svg)](https://badge.fury.io/gh/benno001%2Faws-iam-access-key-rotator)
+![license](https://img.shields.io/github/license/benno001/aws-iam-access-key-rotator)
+
 # AWS IAM access key rotation helper script
 
 Rotates access keys in `~/.aws/credentials` for a given profile by creating a new one and deleting the old one. Does not work if the user has more than one access key configured already.
