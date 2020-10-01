@@ -19,7 +19,7 @@ Rotates access keys in `~/.aws/credentials` for a given profile by creating a ne
 
 ### Cron
 
-Edit crontab via `crontab -e`, and add a line for each profile you want to auto-rotate. For example, if you have two profiles, use something akin to the following to rotate at 9.00, 9.03 and 9.06 every day (arbitrarily set):
+Edit crontab via `crontab -e`, and add a line for each profile you want to auto-rotate. For example, if you have multiple profiles, use something akin to the following to rotate at 9.00, 9.03 and 9.06 every day (arbitrarily set):
 
 ```bash
 # m h  dom mon dow   command
